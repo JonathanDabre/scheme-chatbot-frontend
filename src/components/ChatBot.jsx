@@ -50,6 +50,11 @@ const ChatBot = () => {
         }
     };
 
+    const handleSchemeChange = (e) => {
+        setSelectedScheme(e.target.value);
+        setChatHistory([]); // Clear chat history when a new scheme is selected
+    };
+
     // Auto-scroll to the bottom of chat history
     useEffect(() => {
         const chatContainer = document.querySelector('.chat-container');
@@ -65,7 +70,7 @@ const ChatBot = () => {
                 <select
                     className="border border-gray-300 rounded-md p-2"
                     value={selectedScheme}
-                    onChange={(e) => setSelectedScheme(e.target.value)}
+                    onChange={handleSchemeChange}
                 >
                     <option value="">Select Scheme</option>
                     {schemes.map((scheme) => (

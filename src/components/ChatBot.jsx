@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { RiSendPlaneFill } from "react-icons/ri";
 import { FiChevronDown } from 'react-icons/fi';
+import Modal from './Modal';
 
 const ChatBot = () => {
     const [message, setMessage] = useState('');
@@ -9,6 +10,7 @@ const ChatBot = () => {
     const [selectedScheme, setSelectedScheme] = useState('');
     const [schemes, setSchemes] = useState([]);
     const [features, setFeatures] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Fetch schemes when component mounts
     useEffect(() => {
@@ -69,6 +71,11 @@ const ChatBot = () => {
         setChatHistory([]); // Clear chat history when a new scheme is selected
     };
 
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
+
+
     // Auto-scroll to the bottom of chat history
     useEffect(() => {
         const chatContainer = document.querySelector('.chat-container');
@@ -80,7 +87,7 @@ const ChatBot = () => {
     return (
         <div className="relative flex flex-col xl:h-[87vh] bg-gray-100  ">
             {/* Scheme selection dropdown */}
-            <div className="absolute left-0 top-0 w-full flex justify-start bg-white p-4">
+            <div className="absolute left-0 top-0 w-full flex justify-start space-x-3 bg-white p-4">
                 <div className="relative">
                     <select
                         className="appearance-none bg-[#151B2F] text-white rounded-lg focus:outline-none px-4 py-2 font-semibold text-sm"
@@ -97,6 +104,9 @@ const ChatBot = () => {
                     <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
                         <FiChevronDown className="text-white" />
                     </div>
+                </div>
+                <div className="">
+                    <button disabled={selectedScheme===''} onClick={openModal} className='px-6 py-2 bg-[#151B2F] text-sm font-semibold rounded-lg text-white'>Quick Info</button>
                 </div>
             </div>
 
@@ -135,6 +145,7 @@ const ChatBot = () => {
                     </button>
                 </div>
             </div>
+            <Modal data={features[selectedScheme]} isOpen={isModalOpen} onClose={closeModal} />
         </div>
     );
 };

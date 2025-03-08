@@ -33,6 +33,7 @@ const Navbar = () => {
           <Link to="/constituition-bot" className="text-black hover:text-[#014CD3]">ConstitutionBot</Link>
           <Link to="/learn" className="text-black hover:text-[#014CD3]">Learn</Link>
           <Link to="/create" className="text-black hover:text-[#014CD3]">Create</Link>
+          <a href="https://scheme-flask-api.onrender.com/" target='another' className="text-black hover:text-[#014CD3]">API</a>
         </div>
 
         {/* Auth Buttons */}
